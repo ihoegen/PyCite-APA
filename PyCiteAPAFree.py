@@ -1,9 +1,12 @@
+#helper function to print
 def print_m():
     print "Your citation is: "
     print ""
+#Starts the cylce
 def apa():
     apa_start()
 type_of_document = None
+#in case someone screws up
 def apa_error():
     global type_of_document
     type_of_document = raw_input('Please choose website, book, journal or newspaper ')
@@ -17,7 +20,8 @@ def apa_error():
     elif type_of_documet == 'journal':
         apa_journal()
     else:
-        apa_error()    
+        apa_error()
+#Picks what type of work is being cited
 def apa_start():
     global type_of_document
     type_of_document = raw_input('Are you citing a website, a newspaper, a book, or a journal? ')
@@ -32,32 +36,50 @@ def apa_start():
         apa_journal()
     else:
         apa_error()
+#Helper functin for title
 def apa_title():
     title = raw_input("What is the title? ")
     title_first = title[0].upper()
     title_rest = title[1:].lower()
     title = title_first + title_rest
     return "%s. " %(title)
+#Figures out names of the author(s)
+author_first = None
+author_last = None       
 def author_1():
+    global author_first, author_last
     author_first = raw_input("What is the author's first name? ")
     author_last = raw_input("What is the author's last name? ")
     author_last = author_last[0].upper() + author_last[1:].lower()
     author_first = author_first[0].upper()
+author_first2 = None
+author_last2 = None 
+
 def author_2():
+    global author_first2, author_last2
     author_first2 = raw_input("What is the second author's first name? ")
     author_last2 = raw_input("What is the second author's last name? ")
-    author_last2 = author_last1[0].upper() + author_last1[1:].lower()
-    author_first2 = author_first1[0].upper()
+    author_last2 = author_last2[0].upper() + author_last2[1:].lower()
+    author_first2 = author_first2[0].upper()
+author_first3 = None
+author_last3 = None   
+
 def author_3():
+    global author_first3, author_last3
     author_first3 = raw_input("What is the third author's first name? ")
     author_last3 = raw_input("What is the third author's last name? ")
-    author_last3 = author_last2[0].upper() + author_last2[1:].lower()
-    author_first3 = author_first2[0].upper()
+    author_last3 = author_last3[0].upper() + author_last3[1:].lower()
+    author_first3 = author_first3[0].upper()
+author_first4 = None
+author_last4 = None    
+
 def author_4():
+    global author_first4, author_last4
     author_first4 = raw_input("What is the fourth author's first name? ")
     author_last4 = raw_input("What is the fourth author's last name? ")
-    author_last4 = author_last3[0].upper() + author_last3[1:].lower()
-    author_first4 = author_first3[0].upper()
+    author_last4 = author_last4[0].upper() + author_last4[1:].lower()
+    author_first4 = author_first4[0].upper() 
+#Compiles the author info
 def apa_author():
     amount_authors = raw_input("How many authors are there? Select 1-4. If you have more than 4 authors, enter 4+ ")
     if amount_authors == "1":
