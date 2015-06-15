@@ -1,6 +1,11 @@
 # PyCite-APA
+Welcome to PyCite, Created by Ian Hoegen, Hoegen Developments.
+
 An easy citation creator for APA books, websites, newspapers, journals, and more.
 Download the .zip file to begin, then unzip it and click on PyCite APA Free.exe to begin citations.
+# Using PyCite
+To use PyCite, simply click  the PyCite APA Free.exe file, and be sure to create a shortcut.
+For more info, go to http://www.hoegendevelopments.ga
 # Saving Citations
 To save citations, you can copy and paste it from the console by right clicking on the title bar of the application and 
 hovering over 'edit' and selecting 'mark'
