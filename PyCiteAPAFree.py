@@ -1,10 +1,12 @@
 #helper function to print
-def print_m():
+def print_m(citation):
     print "Your citation is: "
     print ""
+    print citation
+    f = open('references.odt', 'w')
+    f.write(citation)
+    f.write('')
 #Starts the cylce
-def apa():
-    apa_start()
 type_of_document = None
 #in case someone screws up
 def apa_error():
@@ -22,7 +24,7 @@ def apa_error():
     else:
         apa_error()
 #Picks what type of work is being cited
-def apa_start():
+def apa():
     global type_of_document
     type_of_document = raw_input('Are you citing a website, a newspaper, a book, or a journal? ')
     type_of_document= type_of_document.lower()
@@ -125,8 +127,8 @@ def apa_web():
     retrieved_from = raw_input("What is the address of the website? ")
     date = raw_input("What day did you visit this site? ")
     retrieved_from = "Retrieved %s from %s" %(date, retrieved_from)
-    print_m()
-    print author + year + title + retrieved_from
+    citation = author + year + title + retrieved_from
+    print_m(citation)
     copy()
     again()
 def apa_news():
@@ -142,8 +144,8 @@ def apa_news():
         site = "Retrieved %s from %s" %(date, site)
     else:
         site = " "
-    print_m()
-    print author + year + title + publisher + site
+    citation = author + year + title + publisher + site
+    print_m(citation)
     copy()
     again()
 def apa_book():
@@ -152,8 +154,8 @@ def apa_book():
     location = "%s: " %(location)
     publisher = raw_input("What is the name of the publishing company? ")
     publisher = "%s." % (publisher)
-    print_m()
-    print author + year + title + location + publisher
+    citation = author + year + title + location + publisher
+    print_m(citation)
     copy()
     again()
 def apa_journal():
@@ -163,15 +165,16 @@ def apa_journal():
     pages = raw_input('What is the page range of the article? ')
     doi = raw_input("What is the DOI number? ")
     journal_name = "%s, %s, %s. doi: %s"%(journal_name, volume, pages, doi)
-    print_m()
-    print author + year + title + journal_name
+    citation = author + year + title + journal_name
+    print_m(citation)
     copy()
     again()
     
 #Welcome Messages
 def copy():
     print ""
-    print "To copy, right click the title bar, highlight over the edit item and select mark. Highlight the citation and hit enter on your keyboard. Your citation is now ready for use"
+    print "Your file can be found in the document references.txt"
+    print "To copy  from here, right click the title bar, highlight over the edit item and select mark. Highlight the citation and hit enter on your keyboard. Your citation is now ready for use"
 def again():
     more = raw_input('Would you like to PyCite another item? ')
     if more.lower() == "yes":
