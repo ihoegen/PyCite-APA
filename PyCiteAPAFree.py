@@ -173,7 +173,7 @@ def apa_journal():
 #Welcome Messages
 def copy():
     print ""
-    print "Your file can be found in the document references.txt"
+    print "Your file can be found in the document references.odt"
     print "To copy  from here, right click the title bar, highlight over the edit item and select mark. Highlight the citation and hit enter on your keyboard. Your citation is now ready for use"
 def again():
     more = raw_input('Would you like to PyCite another item? ')
