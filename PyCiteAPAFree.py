@@ -17,7 +17,7 @@ def apa_error():
         apa_news()
     elif type_of_document == 'book':
         apa_book()
-    elif type_of_documet == 'journal':
+    elif type_of_document == 'journal':
         apa_journal()
     else:
         apa_error()
