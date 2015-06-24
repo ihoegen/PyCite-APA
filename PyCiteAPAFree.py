@@ -1,17 +1,17 @@
+__author__ = "Ian Hoegen"
+__date__ = "$Jun 24, 2015 10:55:26 AM$"
 #Created 2015 By Ian Hoegen, Hoegen Developments
 #helper function to print
 def print_m(citation):
     print "Your citation is: "
     print ""
     print citation
-    f = open('references.odt', 'w')
-    f.write(citation)
+    f = open('references.odt', 'w+')
+    f.write(citation )
     f.write('')
 #Starts the cylce
-type_of_document = None
 #in case someone screws up
 def apa_error():
-    global type_of_document
     type_of_document = raw_input('Please choose website, book, journal or newspaper ')
     type_of_document = type_of_document.lower()
     if type_of_document == 'website':
@@ -26,9 +26,8 @@ def apa_error():
         apa_error()
 #Picks what type of work is being cited
 def apa():
-    global type_of_document
     type_of_document = raw_input('Are you citing a website, a newspaper, a book, or a journal? ')
-    type_of_document= type_of_document.lower()
+    type_of_document = type_of_document.lower()
     if type_of_document == 'website':
         apa_web()
     elif type_of_document == 'newspaper':
@@ -45,90 +44,55 @@ def apa_title():
     title_first = title[0].upper()
     title_rest = title[1:].lower()
     title = title_first + title_rest
-    return "%s. " %(title)
-#Figures out names of the author(s)
-author_first = None
-author_last = None       
-def author_1():
-    global author_first, author_last
-    author_first = raw_input("What is the author's first name? ")
-    author_last = raw_input("What is the author's last name? ")
-    author_last = author_last[0].upper() + author_last[1:].lower()
-    author_first = author_first[0].upper()
-author_first2 = None
-author_last2 = None 
-
-def author_2():
-    global author_first2, author_last2
-    author_first2 = raw_input("What is the second author's first name? ")
-    author_last2 = raw_input("What is the second author's last name? ")
-    author_last2 = author_last2[0].upper() + author_last2[1:].lower()
-    author_first2 = author_first2[0].upper()
-author_first3 = None
-author_last3 = None   
-
-def author_3():
-    global author_first3, author_last3
-    author_first3 = raw_input("What is the third author's first name? ")
-    author_last3 = raw_input("What is the third author's last name? ")
-    author_last3 = author_last3[0].upper() + author_last3[1:].lower()
-    author_first3 = author_first3[0].upper()
-author_first4 = None
-author_last4 = None    
-
-def author_4():
-    global author_first4, author_last4
-    author_first4 = raw_input("What is the fourth author's first name? ")
-    author_last4 = raw_input("What is the fourth author's last name? ")
-    author_last4 = author_last4[0].upper() + author_last4[1:].lower()
-    author_first4 = author_first4[0].upper() 
+    return "%s. " % (title)
 #Compiles the author info
+x = 0
+n = 0
+author_list = []
+def apa_author_error():
+    apa_author()
 def apa_author():
-    amount_authors = raw_input("How many authors are there? Select 1-4. If you have more than 4 authors, enter 4+ ")
-    if amount_authors == "1":
-        author_1()
-        return "%s, %s. " %(author_last, author_first)
-    elif amount_authors == "2":
-        author_1()
-        author_2()
-        return "%s, %s., & %s, %s. " %(author_last, author_first, author_last2, author_first2)    
-    elif amount_authors == "3":
-        author_1()
-        author_2()
-        author_3()
-        return "%s, %s., %s, %s., %s, %s. " %(author_last, author_first, author_last3, author_first3, author_last2, author_first2) 
-    elif amount_authors == "4":
-        author_1()
-        author_2()
-        author_3()
-        author_4()
-        return "%s, %s., %s, %s., %s, %s., %s, %s. " %(author_last, author_first, author_last4, author_first4, author_last2, author_first2, author_last3, author_first3)     
-    elif amount_authors == "4+":
-        author_1()
-        author_2()
-        author_3()
-        author_4()
-        return "%s, %s., %s, %s., %s, %s., %s, %s. et al. " %(author_last, author_first, author_last4, author_first4, author_last2, author_first2, author_last3, author_first3) 
-    else: 
-        print "Please enter a valid number"
-        apa_author()
-def apa_year():
-    year = raw_input("What year was this published, followed by the month and date. Enter n.d if unknown ")
-    return "(%s). " %(year)
+    global author_list, x, n
+    amount_authors = raw_input("How many authors are there? Select 1-4.")
+    if amount_authors == "1" or amount_authors == "3" or amount_authors == "2" or amount_authors == "4":
+        n = int(amount_authors)
+        while x < n:
+            x += 1
+            author_first = raw_input("What is the author's first name? ")
+            author_last = raw_input("What is the author's last name? ")
+            author_last = author_last[0].upper() + author_last[1:].lower()
+            author_first = author_first[0].upper()
+            author_full = "%s, %s. " % (author_last, author_first)
+            author_list.append(author_full)
+    else:
+        print "You need to enter a number between 1 and 4"
+        apa_author_error()
+def author_declare(z):
+    if n == 1:
+        return str(author_list[0])
+    elif n == 2:
+        return str(author_list[0]) + str(author_list[1])
+    elif n  == 3:
+        return str(author_list[0]) + str(author_list[1]) + str(author_list [2])
+    else:
+        return str(author_list[0]) + str(author_list[1]) + str(author_list[2]) + str(author_list[3])
 title = None
 author = None
 year = None
+author_cite = None
 def apa_info():
-    global title, author, year
+    global title, author, year, author_cite
     title = apa_title()
     author = apa_author()
-    year = apa_year()
+    year = raw_input("What year was this published, followed by the month and date. Enter n.d if unknown ")
+    year =   str(year)+ " "
+    author_cite = author_declare(n)
 def apa_web():
     apa_info()
     retrieved_from = raw_input("What is the address of the website? ")
     date = raw_input("What day did you visit this site? ")
-    retrieved_from = "Retrieved %s from %s" %(date, retrieved_from)
-    citation = author + year + title + retrieved_from
+    retrieved_from = "Retrieved %s from %s" % (date, retrieved_from)
+    citation = author_cite + year + title + retrieved_from
     print_m(citation)
     copy()
     again()
@@ -137,25 +101,27 @@ def apa_news():
     publisher = raw_input("What is the name of the publishing company? ")
     page = raw_input("What page(s) did you find the article on? ")
     publisher = ("%s, pp. %s.") % (publisher, page)
-    electronic =  raw_input("Was this retrieved from a website? ")
+    electronic = raw_input("Was this retrieved from a website? ")
     electronic = electronic.lower()
     if electronic == 'yes':
         site = raw_input('What is the website you found it on? ')
         date = raw_input("What day did you last visit this site? ")
-        site = "Retrieved %s from %s" %(date, site)
+        site = "Retrieved %s from %s" % (date, site)
     else:
         site = " "
-    citation = author + year + title + publisher + site
+    citation = author_cite + year + title + publisher + site
     print_m(citation)
     copy()
     again()
 def apa_book():
     apa_info()
     location = raw_input('Where was the book published? ')
-    location = "%s: " %(location)
+    location = location[0].upper() + location[1:].lower()
+    location = "%s: " % (location)
     publisher = raw_input("What is the name of the publishing company? ")
+    publisher =publisher[0].upper() + publisher[1:].lower()
     publisher = "%s." % (publisher)
-    citation = author + year + title + location + publisher
+    citation = author_cite + year + title + location + publisher
     print_m(citation)
     copy()
     again()
@@ -165,12 +131,11 @@ def apa_journal():
     volume = raw_input('What volume number is it? ')
     pages = raw_input('What is the page range of the article? ')
     doi = raw_input("What is the DOI number? ")
-    journal_name = "%s, %s, %s. doi: %s"%(journal_name, volume, pages, doi)
-    citation = author + year + title + journal_name
+    journal_name = " %s, %s, %s. doi: %s" % (journal_name, volume, pages, doi)
+    citation = author_cite + year + title + journal_name
     print_m(citation)
     copy()
     again()
-    
 #Welcome Messages
 def copy():
     print ""
@@ -179,8 +144,9 @@ def copy():
 def again():
     more = raw_input('Would you like to PyCite another item? ')
     if more.lower() == "yes":
-        welcome()
+        apa()
     else:
+        print "Goodbye"
         exit()
 print "Welcome to PyCite APA Free Edition, for MLA and CMS be sure to download the full version."
 apa()
