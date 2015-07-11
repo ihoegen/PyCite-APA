@@ -1,6 +1,6 @@
-#Created 2015 By Ian Hoegen, Hoegen Developments
+"""Does APA Citations for Journals, Newspapers, and books and websites"""
 def apa():
-    #Picks what type of work is being cited
+    """Picks what type of work is being cited"""
     document_type = raw_input('Are you citing a website, a newspaper, a book,'\
                               ' or a journal? ')
     print""
@@ -16,44 +16,39 @@ def apa():
     else:
         print "Please choose a website, a newspaper, a book, or a journal"
         apa()
-             
-
 def print_m(citation):
-    #helper function to print to file and to console
+    """helper function to print to file and to console"""
     print "Your citation is: "
     print ""
     print citation
-    f = open('references.odt', 'a')
-    f.write(citation + '\n')
-    f.write('')
-    
+    file_for_citation = open('references.odt', 'a')
+    file_for_citation.write(citation + '\n')
+    file_for_citation.write('')
 def year():
-    #Defines the year of the work
-    year = raw_input("What year was this published, followed by the month and"\
+    """Defines the year of the work"""
+    year_of_work = raw_input("What year was this published, followed by the month and"\
                      "date. Enter n.d if unknown ")
     print""
-    return  "(%s) " % (year)
+    return  "(%s) " % (year_of_work)
 
 def title():
-    #Recieves and formats the title
-    title = raw_input("What is the title of the work? ")
+    """Recieves and formats the title"""
+    title_of_work = raw_input("What is the title of the work? ")
     print""
-    title_first = title[0].upper()
-    title_rest = title[1:].lower()
-    title = title_first + title_rest
-    return  "%s. " % (title)
+    title_first = title_of_work[0].upper()
+    title_rest = title_of_work[1:].lower()
+    title_full = title_first + title_rest
+    return  "%s. " % (title_full)
 
 def info():
-    #Recieves and formats the author info, and joins it with the year and title
+    """Formats the author info, and joins it with the year and title"""
     author_list = []
-    x = 1
-    
+    starting_point = 1
     amount_authors = raw_input("How many authors are there? Select 1-4. ")
     print''
     amount_authors = int(amount_authors)
     if amount_authors >= 1 and amount_authors <= 4:
-        n = amount_authors
-        while x <= n:
+        while starting_point <= amount_authors:
             author_first = raw_input("What is the author's first name? ")
             author_last = raw_input("What is the author's last name? ")
             print''
@@ -61,7 +56,7 @@ def info():
             author_first = author_first[0].upper()
             author_full = "%s, %s. " % (author_last, author_first)
             author_list.append(author_full)
-            x += 1
+            starting_point += 1
         author_cite = "".join(author_list)
     else:
         print "You need to enter a number between 1 and 4"
@@ -70,19 +65,18 @@ def info():
     return author_cite + title() + year()
 
 def website():
-    #Website citations
+    """Website citations"""
     retrieved_from = raw_input("What is the address of the website? ")
     print''
     date = raw_input("What day did you visit this site? ")
     print''
     retrieved_from = "Retrieved %s from %s" % (date, retrieved_from)
-    
+
     citation = info() + retrieved_from
     print_m(citation)
     exit_messages()
-
 def newspaper():
-    #Newspaper Citations
+    """Newspaper Citations"""
     publisher = raw_input("What is the name of the publishing company? ")
     print''
     page = raw_input("What page(s) did you find the article on? ")
@@ -91,7 +85,6 @@ def newspaper():
     electronic = raw_input("Was this retrieved from a website? y/n ")
     print ''
     electronic = electronic.lower()
-    
     if electronic == 'y':
         site = raw_input('What is the website you found it on? ')
         print ''
@@ -100,13 +93,11 @@ def newspaper():
         site = "Retrieved %s from %s" % (date, site)
     else:
         site = " "
-    
     citation = info() + publisher + site
     print_m(citation)
     exit_messages()
-
 def book():
-    #Book citations
+    """Book citations"""
     location = raw_input('Where was the book published? ')
     print''
     location = location[0].upper() + location[1:].lower()
@@ -120,7 +111,7 @@ def book():
     exit_messages()
 
 def journal():
-    #Journal Citation
+    """Journal Citation"""
     journal_name = raw_input('What is the name of the journal? ')
     journal_name = journal_name[0].upper() + journal_name[1]
     print ''
@@ -132,27 +123,25 @@ def journal():
     print ''
     web = raw_input('Was it found on a website? y/n ')
     web = web.lower()
-    
+
     if web == "y":
         site = raw_input('What website was it found on? ')
         date = raw_input("What day did you visit it? ")
         web_and_date = " Retrieved from: %s on %s " % (site, date)
     else:
         web_and_date = " "
-        
     journal_name = " %s, %s, %s. doi: %s." % (journal_name, volume, pages, doi)
     citation = info() + journal_name + web_and_date
     print_m(citation)
     exit_messages()
-
 def exit_messages():
-    #messages displayed after the citation
+    """messages displayed after the citation"""
     print ""
     print "Your file can be found in the document references.odt"
     print""
     print "To copy  from here, right click the title bar, highlight over the"\
-          "edit item and select mark. Highlight the citation and hit enter on"\
-          "your keyboard. Your citation is now ready for use"
+        "edit item and select mark. Highlight the citation and hit enter on"\
+        "your keyboard. Your citation is now ready for use"
     print ""
     more = raw_input('Would you like to PyCite another item? y/n ')
     if more.lower() == "y":
@@ -160,6 +149,6 @@ def exit_messages():
     else:
         print "Goodbye"
         exit()
-        
+
 print "Welcome to PyCite APA Free Edition"
 apa()
