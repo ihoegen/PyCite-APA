@@ -26,8 +26,8 @@ def print_m(citation):
     file_for_citation.write('')
 def year():
     """Defines the year of the work"""
-    year_of_work = raw_input("What year was this published, followed by the month and"\
-                     "date. Enter n.d if unknown ")
+    year_of_work = raw_input("What year was this published, followed by the"\
+                            "month and date. Enter n.d if unknown ")
     print""
     return  "(%s) " % (year_of_work)
 
