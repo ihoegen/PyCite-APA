@@ -1,3 +1,5 @@
+[![Github All Releases](https://img.shields.io/github/downloads/ihoegen/PyCite-APA/total.svg)]()
+
 # PyCite-APA
 Welcome to PyCite, Created by Ian Hoegen.
 
